@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9BF/eQK3AtR7OzZzzjyX+jgDT7TQoKClUjeYoiS15iKpxIOlWYIvFohd8f8FOJxJ2sq7koURU8M8QyxX4q1ctw==",
+  "dgSpecHash": "WB+h6RY+T5PLAJBip9IjQDRHVUNLaLBXKmAvyY1jOm04Jz6wLjl/qWx9eIy2UwpYXiqDkYSnSzK9UvZLLuc4wQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lessi\\Desktop\\WeatherApp\\WeatherApp.csproj",
+  "projectFilePath": "C:\\Users\\lessi\\Documents\\GitHub\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lessi\\.nuget\\packages\\atksharp\\3.24.24.95\\atksharp.3.24.24.95.nupkg.sha512",
     "C:\\Users\\lessi\\.nuget\\packages\\cairosharp\\3.24.24.95\\cairosharp.3.24.24.95.nupkg.sha512",

@@ -1,21 +1,20 @@
-﻿using System;
-using Gtk;
+﻿using Gtk;
 
-class Program{
-    static void Start(){
-        Application.Init();
+class WeatherApp : Window{
+    public WeatherApp() : base("Weather Application"){
+        SetDefaultSize(800, 600);
+        SetPosition(WindowPosition.Center);
+        SetIconFromFile("cloud.png");
 
-        Window main = new Window("My first GTK# Application!");
-        main.Resize(1400, 800);
+        DeleteEvent += delegate { Application.Quit(); };
 
-        main.DeleteEvent += delegate { Application.Quit(); };
-
-        main.Show();
-
-        Application.Run();
+        Show();
     }
 
-    static void Main(string[] args){
-        Start();
+    public static void Main()
+    {
+        Application.Init();
+        new WeatherApp();        
+        Application.Run();
     }
 }

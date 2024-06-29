@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lessi\\Desktop\\WeatherApp\\WeatherApp.csproj": {}
+    "C:\\Users\\lessi\\Documents\\GitHub\\WeatherApp\\WeatherApp\\WeatherApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lessi\\Desktop\\WeatherApp\\WeatherApp.csproj": {
+    "C:\\Users\\lessi\\Documents\\GitHub\\WeatherApp\\WeatherApp\\WeatherApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lessi\\Desktop\\WeatherApp\\WeatherApp.csproj",
+        "projectUniqueName": "C:\\Users\\lessi\\Documents\\GitHub\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
         "projectName": "WeatherApp",
-        "projectPath": "C:\\Users\\lessi\\Desktop\\WeatherApp\\WeatherApp.csproj",
+        "projectPath": "C:\\Users\\lessi\\Documents\\GitHub\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
         "packagesPath": "C:\\Users\\lessi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lessi\\Desktop\\WeatherApp\\obj\\",
+        "outputPath": "C:\\Users\\lessi\\Documents\\GitHub\\WeatherApp\\WeatherApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lessi\\AppData\\Roaming\\NuGet\\NuGet.Config",
