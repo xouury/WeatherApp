@@ -1,99 +1,86 @@
-﻿using System;
-using Cairo;
+﻿using Gdk;
 using Gtk;
 using Pango;
 
-public class WeatherApp : Window
-{
-    Entry cityEntry;
-    Label weatherLabel;
-    Label errorLabel;
+class Weather : Gtk.Window {
+    private int width; 
+    private int height;
+    private Box mainBox; 
 
-    public WeatherApp() : base("Simple Weather App")
-    {
-        SetDefaultSize(1200, 700);
-        SetPosition(WindowPosition.Center);
+    public Weather() : base("Weather Application") {
+        mainBox = new Box(Orientation.Vertical, 2);
 
-        VBox headerVBox = new VBox();
-        HBox headerBox = new HBox();
-
-        headerBox.ModifyBg(StateType.Normal, new Gdk.Color(0, 120, 215));
-
-        Label headerLabel = new Label("Weather Dashboard");
-        headerLabel.ModifyFg(StateType.Normal, new Gdk.Color(255, 255, 255)); 
-        headerLabel.SetAlignment(0.5f, 0.5f); 
-
-        FontDescription headerFont = FontDescription.FromString("Sans 15");
-        headerLabel.ModifyFont(headerFont);
-
-        headerLabel.WidthRequest = 400;
-        headerLabel.HeightRequest = 50;
-
-        headerBox.PackStart(headerLabel, true, true, 0);
-        headerVBox.PackStart(headerBox, false, false, 0);
-
-        VBox entryBox = new VBox();
-        entryBox.Spacing = 10;
-
-        Label entryLabel = new Label("Enter the city name:");
-        FontDescription labelFont = FontDescription.FromString("Sans 12");
-        labelFont.Weight = Weight.Bold;
-        entryLabel.ModifyFont(labelFont);
-        entryBox.PackStart(entryLabel, false, false, 5);
-
-        cityEntry = new Entry();
-        cityEntry.PlaceholderText = "E.g., New York, Paris, Berlin";
-
-        FontDescription entryFont = FontDescription.FromString("Sans 12");
-        cityEntry.ModifyFont(entryFont);
-
-        cityEntry.WidthRequest = 400;
-        cityEntry.HeightRequest = 30;
-        entryBox.PackStart(cityEntry, false, false, 5);
-
-        Button searchButton = new Button("Search");
-        searchButton.ModifyBg(StateType.Normal, new Gdk.Color(68, 114, 196)); 
-        searchButton.ModifyFg(StateType.Normal, new Gdk.Color(255, 255, 255)); 
-        searchButton.Clicked += OnSearchButtonClicked;
-        searchButton.WidthRequest = 400;
-        searchButton.HeightRequest = 30;
-        entryBox.PackStart(searchButton, false, false, 5);
-
-        HBox orBox = new HBox();
-        Label orLabel = new Label("or");
-        orBox.PackStart(new Label(""), true, true, 0); 
-        orBox.PackStart(orLabel, false, false, 0);
-        orBox.PackStart(new Label(""), true, true, 0); 
-
-        entryBox.PackStart(orBox, false, false, 5);
-
-        Button locationButton = new Button("Use Current Location");
-        locationButton.ModifyBg(StateType.Normal, new Gdk.Color(255, 255, 255)); 
-        locationButton.ModifyFg(StateType.Normal, new Gdk.Color(255, 255, 255)); 
-        locationButton.WidthRequest = 400;
-        locationButton.HeightRequest = 30;
-
-        entryBox.PackStart(locationButton, false, false, 5);
-
-
-        Gtk.Alignment alignment = new Gtk.Alignment(0.05f, 0, 0, 0);
-        alignment.Add(entryBox);
-
-        headerVBox.PackStart(alignment, false, false, 0);
-
-        Add(headerVBox);
+        SetUpWindow();
         ShowAll();
     }
 
-    void OnSearchButtonClicked(object sender, EventArgs args)
-    {
-        string cityName = cityEntry.Text;
+    private void SetUpWindow(){
+        width = 1200; height = 700;
+        Resize(width, height);
+        Add(mainBox);
+
+        AddHeader();
+        AddLabels();
     }
 
-    public static void Main()
-    {
+    private void SetUpFont(FontDescription fontDescription, params Widget[] widgets){
+        foreach (var widget in widgets)
+        {
+            if (widget is Label label)
+            {
+                label.ModifyFont(fontDescription);
+            }
+        }
+    }
+
+    private void AddHeader(){
+        EventBox colorBox = new EventBox();
+        colorBox.ModifyBg(StateType.Normal, new Gdk.Color(173, 216, 230)); 
+        colorBox.HeightRequest = 60;
+
+        Label label = new Label("Weather Dashboard");
+        label.ModifyFont(FontDescription.FromString("Sans Bold 15"));
+
+        Box hbox = new Box(Orientation.Vertical, 2);
+        hbox.PackStart(colorBox, false, false, 0);
+
+        colorBox.Add(label);
+
+        mainBox.PackStart(hbox, false, false, 0);
+    }
+
+    private void AddLabels(){
+        Box entryBox = new Box(Orientation.Vertical, 2);
+        entryBox.Spacing = 10;
+
+        Label cityLabel = new Label("Enter a city name:") {Xalign = 0, Yalign = 10};
+
+        Entry cityEntry = new Entry {
+            WidthRequest = 250,
+            HeightRequest = 30
+        };
+
+        FontDescription fontDesc = FontDescription.FromString("Sans Bold 12");
+        SetUpFont(fontDesc, cityLabel);
+
+        entryBox.PackStart(cityLabel, false, false, 5);
+        entryBox.PackStart(cityEntry, false, false, 5);
+
+        Gtk.Alignment alignment = new Gtk.Alignment(0.05f, 0, 0, 0) {entryBox};
+
+        mainBox.PackStart(alignment, false, false, 0);
+    }
+
+    protected override bool OnDeleteEvent(Event e) {
+        Application.Quit();
+        return true;
+    }
+}
+
+class Program {
+    static void Main() {
         Application.Init();
-        new WeatherApp();
+        Weather w = new Weather();
         Application.Run();
     }
 }
