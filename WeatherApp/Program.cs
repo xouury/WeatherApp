@@ -10,7 +10,9 @@ class Weather : Gtk.Window {
     public Weather() : base("Weather Application") {
         mainBox = new Box(Orientation.Vertical, 2);
 
+        ApplyCss();
         SetUpWindow();
+        
         ShowAll();
     }
 
@@ -20,26 +22,24 @@ class Weather : Gtk.Window {
         Add(mainBox);
 
         AddHeader();
-        AddLabels();
+        AddEntryWidgets();
     }
 
-    private void SetUpFont(FontDescription fontDescription, params Widget[] widgets){
-        foreach (var widget in widgets)
-        {
-            if (widget is Label label)
-            {
-                label.ModifyFont(fontDescription);
-            }
-        }
+    private void ApplyCss(){
+        CssProvider cssProvider = new CssProvider();
+        cssProvider.LoadFromPath("Styles.css"); 
+        StyleContext.AddProviderForScreen(Screen.Default, cssProvider, StyleProviderPriority.Application);
     }
 
     private void AddHeader(){
-        EventBox colorBox = new EventBox();
-        colorBox.ModifyBg(StateType.Normal, new Gdk.Color(173, 216, 230)); 
-        colorBox.HeightRequest = 60;
+        EventBox colorBox = new EventBox(){
+            Name = "header-event-box",
+            HeightRequest = 60,
+        };
 
-        Label label = new Label("Weather Dashboard");
-        label.ModifyFont(FontDescription.FromString("Sans Bold 15"));
+        Label label = new Label("Weather Dashboard"){
+            Name = "weather-dashboard-label"
+        };
 
         Box hbox = new Box(Orientation.Vertical, 2);
         hbox.PackStart(colorBox, false, false, 0);
@@ -49,25 +49,40 @@ class Weather : Gtk.Window {
         mainBox.PackStart(hbox, false, false, 0);
     }
 
-    private void AddLabels(){
-        Box entryBox = new Box(Orientation.Vertical, 2);
-        entryBox.Spacing = 10;
+     private void AddEntryWidgets(){
+        Box entryBox = new Box(Orientation.Vertical, 2){
+            Spacing = 10
+        };
 
-        Label cityLabel = new Label("Enter a city name:") {Xalign = 0, Yalign = 10};
+        Label cityLabel = new Label("Enter a city name:"){
+            Name = "city-label",
+            Xalign = 0,
+            Yalign = 10
+        };
 
         Entry cityEntry = new Entry {
+            Name = "city-entry",
+            PlaceholderText = "E.g. Prague, Berlin, Paris",
             WidthRequest = 250,
             HeightRequest = 30
         };
 
-        FontDescription fontDesc = FontDescription.FromString("Sans Bold 12");
-        SetUpFont(fontDesc, cityLabel);
-
         entryBox.PackStart(cityLabel, false, false, 5);
+
+        Button searchButton = new Button("Search"){
+            Name = "search-button",
+        };
+
+        Button locationButton = new Button("Use current location"){
+            Name = "location-button"
+        };
+
         entryBox.PackStart(cityEntry, false, false, 5);
+        entryBox.PackStart(searchButton, false, false, 5);
+        entryBox.PackStart(locationButton, false, false, 5);
 
-        Gtk.Alignment alignment = new Gtk.Alignment(0.05f, 0, 0, 0) {entryBox};
-
+        Gtk.Alignment alignment = new Gtk.Alignment(0.05f, 0, 0, 0);
+        alignment.Add(entryBox);
         mainBox.PackStart(alignment, false, false, 0);
     }
 
