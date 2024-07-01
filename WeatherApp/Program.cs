@@ -1,18 +1,17 @@
 ﻿using Gdk;
 using Gtk;
+using System.Net;
+using System.Text.Json;
 
-class Weather : Gtk.Window {
-    private int width; private int height;
-    Box main;
+public abstract class WeatherBase : Gtk.Window{
+    protected int width = 1400, height = 700;
+    protected Box main;
+    protected Label cityLabel, temperatureLabel, windLabel, humidityLabel;
 
-    private Label cityLabel;
-    private Label temperatureLabel;
-    private Label windLabel;
-    private Label humidityLabel;
-
-
-    public Weather() : base("Weather Application") {
-        main = new Box(Orientation.Vertical, 2);
+    public WeatherBase() : base("Weather Application") {
+        SetDefaultSize(width, height);
+        SetPosition(WindowPosition.Center);
+        SetIconFromFile("cloud.png");
 
         cityLabel = new Label("_________ (_________)"){
             Xalign = 0.01f,
@@ -34,17 +33,22 @@ class Weather : Gtk.Window {
             Yalign = 0
         };
 
-        ApplyCss();
+        main = new Box(Orientation.Vertical, 2);
+        Add(main);
+        ShowAll();
+    }
+}
+
+public class WeatherUI : WeatherBase{
+    string APIKey = "fb08e273a4569cd1c21f412029faa1e0";
+
+    public WeatherUI() {
         SetUpWindow();
-        
+        ApplyCss();
         ShowAll();
     }
 
     private void SetUpWindow(){
-        width = 1400; height = 700;
-        Resize(width, height);
-
-        Add(main);
         AddHeader(main);
 
         Box horizontalLayout = new Box(Orientation.Horizontal, 20);
@@ -65,8 +69,8 @@ class Weather : Gtk.Window {
         CssProvider cssProvider = new CssProvider();
         cssProvider.LoadFromPath("Styles.css"); 
         StyleContext.AddProviderForScreen(Screen.Default, cssProvider, StyleProviderPriority.Application);
-        
-        this.Name = "window";
+
+        Name = "window";
     }
 
     private void AddHeader(Box container){
@@ -79,12 +83,12 @@ class Weather : Gtk.Window {
             Name = "weather-dashboard-label"
         };
 
-        Box hbox = new Box(Orientation.Vertical, 2);
-        hbox.PackStart(colorBox, false, false, 0);
+        Box vbox = new Box(Orientation.Vertical, 2);
+        vbox.PackStart(colorBox, false, false, 0);
 
         colorBox.Add(label);
 
-        container.PackStart(hbox, false, false, 0);
+        container.PackStart(vbox, false, false, 0);
     }
 
      private void AddEntryWidgets(Box container){
@@ -110,6 +114,7 @@ class Weather : Gtk.Window {
         Button searchButton = new Button("Search"){
             Name = "search-button",
         };
+        searchButton.Clicked += async (sender, e) => await OnSearchButtonClicked(cityEntry.Text);
 
         Button locationButton = new Button("Use Current Location"){
             Name = "location-button"
@@ -119,8 +124,7 @@ class Weather : Gtk.Window {
         entryBox.PackStart(searchButton, false, false, 5);
         entryBox.PackStart(locationButton, false, false, 5);
 
-        Alignment alignment = new Alignment(0.05f, 0, 0, 0);
-        alignment.Add(entryBox);
+        Alignment alignment = new Alignment(0.05f, 0, 0, 0) {entryBox};
         container.PackStart(alignment, false, false, 0);
     }
 
@@ -193,12 +197,58 @@ class Weather : Gtk.Window {
         Application.Quit();
         return true;
     }
+
+    private async Task OnSearchButtonClicked(string cityName) {
+        var weatherData = await GetWeather(cityName);
+
+        if (weatherData != null) {
+            cityLabel.Text = $"{weatherData.name} ({weatherData.sys?.country})";
+            temperatureLabel.Text = $"Temperature: {weatherData.main?.temp} C";
+            windLabel.Text = $"Wind: {weatherData.wind?.speed} M/S";
+            humidityLabel.Text = $"Humidity: {weatherData.main?.humidity} %";
+        }
+    }
+
+    private async Task<WeatherData.Root> GetWeather(string cityName){
+        using(HttpClient web = new HttpClient()){
+            string url = $"http://api.openweathermap.org/data/2.5/weather?q={cityName}&appid={APIKey}";
+            string json = await web.GetStringAsync(url);
+            return JsonSerializer.Deserialize<WeatherData.Root>(json)!;
+        }
+    }
+}
+
+public class WeatherData{
+    public string? name { get; set; }
+
+    public class Main{
+        public float temp{ get; set; }
+        public int humidity{ get; set; }
+    }
+    public class Wind{
+        public float speed{ get; set; }
+    }
+    public class Sys{
+        public string? country{ get; set; }
+    }
+    public class Weather{
+        public string? main { get; set; }
+        public string? description{ get; set;} 
+        public string? icon { get; set; }
+    }
+    public class Root{
+        public string? name { get; set; }
+        public Main? main { get; set; }
+        public Wind? wind { get; set; }
+        public Sys? sys { get; set; }
+        public List<Weather>? weather { get; set;}
+    }
 }
 
 class Program {
     static void Main() {
         Application.Init();
-        Weather w = new Weather();
+        var w = new WeatherUI();
         Application.Run();
     }
 }
