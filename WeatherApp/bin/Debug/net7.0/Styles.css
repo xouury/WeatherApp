@@ -10,12 +10,12 @@
 }
 
 #weather-dashboard-label {
-    font-size: 26px;
+    font-size: 27px;
     font-weight: bold;
 }
 
 #city-label {
-    font-size: 23px;
+    font-size: 27px;
     font-weight: bold;
 }
 
@@ -63,13 +63,25 @@
 }
 
 #forecast-label{
-    font-size: 25px;
+    font-size: 27px;
     font-weight: bold;
 }
 
 #forecast-box{
     background-color: #787B7D; 
     border-radius: 5px;
+    margin-top: 20px;
     font-size: 20px;
     color: #FFFFFF;
+}
+
+#city-weather-label{
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.forecast-weather-label{
+    text-decoration: underline;
+    font-weight: bold;
 }

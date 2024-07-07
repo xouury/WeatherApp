@@ -38,9 +38,11 @@ C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherAp
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.AssemblyInfoInputs.cache
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.AssemblyInfo.cs
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.csproj.CoreCompileInputs.cache
-C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.csproj.CopyComplete
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.dll
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\refint\WeatherApp.dll
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.pdb
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.genruntimeconfig.cache
 C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\ref\WeatherApp.dll
+C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.sourcelink.json
+C:\Users\lessi\Documents\GitHub\WeatherApp\WeatherApp\obj\Debug\net7.0\WeatherApp.csproj.Up2Date
