@@ -4,13 +4,13 @@ The application fetches weather data from the OpenWeatherMap API and displays th
 ## Installation
 
 1. **Clone the repository:**
-    git clone https://github.com/xouury/WeatherApp
-    cd weatherApp
+    -git clone https://github.com/xouury/WeatherApp
+    -cd weatherApp
 
-2. **Install dependencies:**
+3. **Install dependencies:**
     Ensure you have Gtk# and Newtonsoft.Json installed. You can add them via NuGet or your package manager.
 
-3. **Run the application:**
+4. **Run the application:**
     dotnet run
 
 ## Usage
