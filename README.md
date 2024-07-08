@@ -4,8 +4,8 @@ The application fetches weather data from the OpenWeatherMap API and displays th
 ## Installation
 
 1. **Clone the repository:** <br>
-    -git clone https://github.com/xouury/WeatherApp <br>
-    -cd weatherApp
+    - git clone https://github.com/xouury/WeatherApp <br>
+    - cd weatherApp
 
 2. **Install dependencies:** <br>
     2.1 Ensure you have GTK#. If you don't, on the following website it is possible to install GTK# for macOS, Linux or Windows: https://www.mono-project.com/download/stable/#download-win <br>
