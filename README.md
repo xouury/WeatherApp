@@ -23,7 +23,7 @@ The application fetches weather data from the OpenWeatherMap API and displays th
      
 ## OpenWeatherMap API
 
-The application fetches weather data using the OpenWeatherMap API. To use this application, you need to have a valid API key from OpenWeatherMap. Replace the placeholder `APIKey` in the `WeatherUI` class with your actual API key.
+The application fetches weather data using the OpenWeatherMap API. To use this application, you need to have a valid API key from OpenWeatherMap. If you want to use your own key, replace the placeholder `APIKey` in the `WeatherUI` class with your actual API key.
 
 ## Contact
 
