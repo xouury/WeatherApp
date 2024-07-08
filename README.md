@@ -8,9 +8,10 @@ The application fetches weather data from the OpenWeatherMap API and displays th
     -cd weatherApp
 
 3. **Install dependencies:**
-    Ensure you have Gtk# and Newtonsoft.Json installed. You can add them via NuGet or your package manager.
+    3.1 Ensure you have Gtk#. If you don't, on the following website it is possible to install GTK# for macOS, Linux or Windows: https://www.mono-project.com/download/stable/#download-win <br>
+    3.2 Ensure you have Newtonsoft.Json installed. You can add it via NuGet. 
 
-4. **Run the application:**
+5. **Run the application:**
     dotnet run
 
 ## Usage
