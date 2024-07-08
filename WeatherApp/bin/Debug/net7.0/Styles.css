@@ -85,3 +85,13 @@
     text-decoration: underline;
     font-weight: bold;
 }
+
+#text-box{
+    margin-left: 15px;
+}
+
+#icon-descripton{
+    font-size: 20px;
+    color: #FFFFFF;
+    font-style: italic;
+}
