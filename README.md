@@ -3,7 +3,7 @@ The application fetches weather data from the OpenWeatherMap API and displays th
 
 ## Installation
 
-1. **Clone the repository:**
+1. **Clone the repository:** <br>
     -git clone https://github.com/xouury/WeatherApp <br>
     -cd weatherApp
 
