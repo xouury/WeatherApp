@@ -6,8 +6,7 @@ using Gdk;
 using Gtk;
 using Newtonsoft.Json;
 
-public abstract class WeatherBase : Gtk.Window
-{
+public abstract class WeatherBase : Gtk.Window{
     protected int width = 1400, height = 700;
     protected Box main;
     protected Label cityLabel, temperatureLabel, windLabel, humidityLabel;
@@ -265,6 +264,7 @@ public class WeatherUI : WeatherBase{
         try{
             using (HttpClient client = new HttpClient()){
                 byte[] imageBytes = await client.GetByteArrayAsync(url);
+                
                 using (PixbufLoader loader = new PixbufLoader(imageBytes)){
                     Pixbuf pixbuf = loader.Pixbuf;
                     Pixbuf scaled = pixbuf.ScaleSimple(width, height, InterpType.Bilinear);
