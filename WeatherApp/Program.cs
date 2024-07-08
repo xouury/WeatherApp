@@ -107,7 +107,7 @@ public class WeatherUI : WeatherBase{
 
         Label cityLabel = new Label("Enter a City Name:"){
             Name = "city-label",
-            Xalign = 0,
+            Xalign = 0.05f,
             Yalign = 10
         };
 
@@ -135,8 +135,8 @@ public class WeatherUI : WeatherBase{
     private void AddForecastWidgets(Box container){
         Box detailsBox = new Box(Orientation.Horizontal, 150){
             Name = "weather-box",
-            WidthRequest = 830,
-            HeightRequest = 230
+            WidthRequest = 860,
+            HeightRequest = 260
         };
 
         Box textBox = new Box(Orientation.Vertical, 20){
@@ -188,8 +188,8 @@ public class WeatherUI : WeatherBase{
 
     private Box CreateForecastBox(int index){
         Box forecastBox = new Box(Orientation.Vertical, 5){
-            WidthRequest = 200,
-            HeightRequest = 200,
+            WidthRequest = 210,
+            HeightRequest = 210,
             Name = "forecast-box"
         };
 
@@ -246,7 +246,9 @@ public class WeatherUI : WeatherBase{
 
     private async void UpdateCurrentWeatherDetails(WeatherData.Root weatherData){
         var currentWeather = weatherData.list![0];
-        cityLabel.Text = $"{weatherData.city!.name} ({DateTime.Parse(currentWeather.dt_txt!).ToString("dddd")})";
+        var day = DateTime.Parse(currentWeather.dt_txt!).ToString("dddd");
+
+        cityLabel.Text = $"{weatherData.city!.name} ({weatherData.city.country}), {day}";
         temperatureLabel.Text = $"Temperature: {currentWeather.main!.temp} °C";
         windLabel.Text = $"Wind: {currentWeather.wind!.speed} M/S";
         humidityLabel.Text = $"Humidity: {currentWeather.main.humidity} %";
