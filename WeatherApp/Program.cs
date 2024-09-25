@@ -44,7 +44,7 @@ public abstract class WeatherBase : Gtk.Window{
 }
 
 public class WeatherUI : WeatherBase{
-    string APIKey = "fb08e273a4569cd1c21f412029faa1e0";
+    string APIKey;
     Box[] forecastBoxes = new Box[4];
     
     private Image weatherImage;
